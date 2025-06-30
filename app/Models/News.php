@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class News extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
     
     protected $fillable = [
         'category_id',
@@ -33,6 +33,24 @@ class News extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeWithMinimalSelect($query)
+    {
+        return $query->with([         // Only ID and name
+            'category:id,category',    // Only ID and category name
+            'section:id,section_name',            // Only ID and type name
+            'author:id,name',    // Only ID and district
+        ]);
+    }
+    public static function getCategory($section_name)
+    {
+        return self::withMinimalSelect()
+            ->whereHas('section', fn ($q) => $q->where('section_name', $section_name))
+            ->whereStatus('publish')
+            ->latest()
+            ->limit(4)
+            ->get();
     }
 }

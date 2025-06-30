@@ -2,49 +2,65 @@
 
 namespace App\Livewire\Admin;
 
-use Livewire\Component;
+use App\Models\Category;
+use App\Models\Section;
+use LivewireUI\Modal\ModalComponent;
 use App\Services\NewsService;
+use App\Traits\savePhotosToNewsFolder;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Session;
 
-class CreateNews extends Component
+class CreateNews extends ModalComponent
 {
+    use savePhotosToNewsFolder,WithFileUploads;
+
     public $title, $content, $category_id, $section_id, $photo, $status = 'publish';
+    public $categories;
+    public $sections;
 
     protected $rules = [
         'title'       => 'required|string|max:255',
         'content'     => 'required|string',
         'category_id' => 'required|exists:categories,id',
         'section_id'  => 'required|exists:sections,id',
-        'photo'       => 'required|string', // or `image` if you're handling uploads
+        'photo'       => 'required|unique:news|mimes:jpeg,png,jpg,webp|max:10240',
         'status'      => 'required|in:draft,publish,archive',
     ];
 
-    protected NewsService $newsService;
 
     public function mount()
     {
-        $this->newsService = new NewsService();
+        $this->categories = Category::get();
+        $this->sections = Section::get();
     }
 
     public function createNews()
     {
         $this->validate();
 
-        $this->newsService->createNews([
+        $savedFileName = $this->saveToNews('photo',$this->photo);
+
+        NewsService::createNews([
             'title'       => $this->title,
             'content'     => $this->content,
             'category_id' => $this->category_id,
             'section_id'  => $this->section_id,
-            'photo'       => $this->photo,
+            'photo'       => $savedFileName,
             'status'      => $this->status,
         ]);
 
-        session()->flash('success', 'News article created successfully.');
+        Session::flash('msg', 'Operation Succesful');
+        $this->dispatch('News', 'refreshComponent');
+        $this->closeModal();
 
-        $this->reset(['title', 'content', 'category_id', 'section_id', 'photo', 'status']);
+        // session()->flash('success', 'News article created successfully.');
+
+        // $this->reset(['title', 'content', 'category_id', 'section_id', 'photo', 'status']);
     }
 
     public function render()
     {
         return view('livewire.admin.create-news');
     }
+    
 }

@@ -1,5 +1,5 @@
 <div>
-    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
+    {{-- The whole world belongs to you. --}}
     <div class="card">
         <!-- Card header -->
         <div class="card-header border-0">
@@ -27,7 +27,7 @@
                         <option value="40">40</option>
                         <option value="50">50</option>
                     </select>
-                    <a href="#" class="btn  btn-neutral w-100" onclick="Livewire.dispatch('openModal', { component: 'admin.forms.add-new-user' })">Add New User</a>
+                    <a href="#" class="btn  btn-neutral w-100" onclick="Livewire.dispatch('openModal', { component: 'admin.forms.create-category' })">Add New Category</a>
                 </div>
 
 
@@ -53,18 +53,18 @@
                     <thead class="thead-light">
                         <tr>
                             <th scope="col" class="sort" data-sort="">#</th>
-                            <th scope="col" class="sort" data-sort="name">Name</th>
-                            <th scope="col" class="sort" data-sort="budget">Email</th>
+                            <th scope="col" class="sort" data-sort="name">Category</th>
+                            <th scope="col" class="sort" data-sort="budget">Created By</th>
                             <th scope="col" class="sort" data-sort="status">Option</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody class="list">
-                        @foreach($users as $i=>$user)
+                        @foreach($categories as $i=>$category)
                         <tr>
                             <td>{{$i + 1}}</td>
-                            <td scope="row">{{$user->name}}</td>
-                            <td class="budget">{{$user->email}}</td>
+                            <td scope="row" class="text-capitalize">{{$category->category}}</td>
+                            <td class="budget">{{$category->creator->name}}</td>
                             <td class="">
                                 <button class="btn btn-sm btn-outline-primary">Edit</button>
                                 <button class="btn btn-sm btn-outline-danger">Delete</button>
@@ -80,13 +80,13 @@
                     <!-- Left: Result summary -->
                     <div class="mb-2 mb-md-0">
                         <small>
-                            Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }} results
+                            Showing {{ $categories->firstItem() }} to {{ $categories->lastItem() }} of {{ $categories->total() }} results
                         </small>
                     </div>
 
                     <!-- Right: Pagination links -->
                     <div>
-                        {{ $users->links('vendor.livewire.pagination.bootstrap') }}
+                        {{ $categories->links('vendor.livewire.pagination.bootstrap') }}
                     </div>
                 </div>
             </div>

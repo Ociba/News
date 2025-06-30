@@ -10,9 +10,9 @@ class CategoryService
     /**
      * Get all categories
      */
-    public function getAllCategories()
+    public static function getAllCategories($perPage)
     {
-        return Category::latest()->get();
+        return Category::latest()->paginate($perPage);
     }
 
     /**
@@ -26,10 +26,10 @@ class CategoryService
     /**
      * Create a new category
      */
-    public function createCategory(string $name)
+    public static function createCategory(string $category)
     {
         return Category::create([
-            'category' => $name,
+            'category' => $category,
             'created_by' => Auth::id(),
         ]);
     }

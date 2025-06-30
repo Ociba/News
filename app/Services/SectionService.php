@@ -7,15 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class SectionService
 {
-    public function getAllSections($withTrashed = false)
+    public static function getAllSections($perPage)
     {
-        $query = Section::latest();
-
-        if ($withTrashed) {
-            $query->withTrashed();
-        }
-
-        return $query->get();
+        return Section::latest()->paginate($perPage);
     }
 
     public function findSection(int $id)
@@ -23,10 +17,10 @@ class SectionService
         return Section::findOrFail($id);
     }
 
-    public function createSection(string $name)
+    public static function createSection(string $section_name)
     {
         return Section::create([
-            'section_name' => $name,
+            'section_name' => $section_name,
             'created_by'   => Auth::id(),
         ]);
     }

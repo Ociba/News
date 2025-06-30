@@ -43,7 +43,7 @@
 
     <!-- Featured News Slider Start -->
     <div class="container-fluid pt-5 mb-3">
-        <div class="container">
+        <div class="containe">
             @livewire('welcome.section.featured-news')
         </div>
     </div>
@@ -52,7 +52,7 @@
 
     <!-- News With Sidebar Start -->
     <div class="container-fluid">
-        <div class="container">
+        <div class="containe">
             <div class="row">
                 <div class="col-lg-8">
                     @livewire('welcome.section.latest-news')

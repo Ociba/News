@@ -2,37 +2,36 @@
 
 namespace App\Livewire\Admin;
 
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use App\Services\SectionService;
+use Illuminate\Support\Facades\Session;
 
-class CreateSection extends Component
+class CreateSection extends ModalComponent
 {
+
     public $section_name;
+    
 
     protected $rules = [
-        'section_name' => 'required|string|max:255',
+        'section_name' => 'required|unique:sections',
     ];
 
-    protected SectionService $sectionService;
+     // Customize validation error messages
+     protected $messages = [
+        'section_name.required' => 'Section Name is required',
+    ];
 
-    public function mount()
-    {
-        $this->sectionService = new SectionService();
-    }
 
     public function createSection()
     {
         $this->validate();
 
-        $this->sectionService->createSection($this->section_name);
-
-        session()->flash('success', 'Section created successfully.');
-
-        $this->reset('section_name');
-
-        // Optionally emit event or redirect
-        $this->emit('sectionCreated');
+        SectionService::createSection($this->section_name);
+        Session::flash('msg', 'Operation Succesful');
+        $this->dispatch('Section', 'refreshComponent');
+        $this->closeModal();
     }
+
 
     public function render()
     {

@@ -15,7 +15,7 @@
             <a href="/news/health" class="nav-item nav-link">Health</a>
             <a href="/news/life-style" class="nav-item nav-link">Life Style</a>
             <a href="/news/entertainment" class="nav-item nav-link">Entertainment</a>
-            <a href="/Sports" class="nav-item nav-link">Sports</a>
+            <a href="/news/sports" class="nav-item nav-link">Sports</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More</a>
                 <div class="dropdown-menu rounded-0 m-0">

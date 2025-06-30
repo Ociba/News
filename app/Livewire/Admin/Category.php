@@ -2,21 +2,21 @@
 
 namespace App\Livewire\Admin;
 
+use App\Services\CategoryService;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Services\NewsService;
 
-class News extends Component
+class Category extends Component
 {
     use WithPagination;
 
-    protected $listeners = ['News' => '$refresh'];
+    protected $listeners = ['Category' => '$refresh'];
 
-    public $perPage = 10;
     public $search = '';
-    public $sortBy = 'title';
+    public $perPage = 10;
+    public $sortBy = 'category';
 
-
+    
     protected string $paginationTheme = 'bootstrap';
 
     public function updatedSearch()
@@ -24,11 +24,10 @@ class News extends Component
         $this->resetPage();
     }
 
-
     public function render()
     {
-        return view('livewire.admin.news',[
-            'news'=>NewsService::getAllNews($this->perPage)
+        return view('livewire.admin.category',[
+            'categories' =>CategoryService::getAllCategories($this->perPage)
         ]);
     }
 }

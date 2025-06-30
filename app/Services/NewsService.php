@@ -11,7 +11,7 @@ class NewsService
     /**
      * Get all news (latest first)
      */
-    public function getAllNews($perPage = 10)
+    public static function getAllNews($perPage)
     {
         return News::latest()->paginate($perPage);
     }
@@ -27,7 +27,7 @@ class NewsService
     /**
      * Create a news post
      */
-    public function createNews(array $data)
+    public static function createNews(array $data)
     {
         return News::create([
             'category_id' => $data['category_id'],

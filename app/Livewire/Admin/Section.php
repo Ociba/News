@@ -4,28 +4,30 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use App\Services\SectionService;
+use Livewire\WithPagination;
 
 class Section extends Component
 {
-    public $sections = [];
+    use WithPagination;
 
-    protected SectionService $sectionService;
+    protected $listeners = ['Section' => '$refresh'];
 
-    public function mount()
+    public $perPage = 10;
+    public $search = '';
+    public $sortBy = 'section_name';
+
+    protected string $paginationTheme = 'bootstrap';
+
+    public function updatedSearch()
     {
-        $this->sectionService = new SectionService();
-        $this->loadSections();
+        $this->resetPage();
     }
 
-    public function loadSections()
-    {
-        $this->sections = $this->sectionService->getAllSections();
-    }
 
     public function render()
     {
-        return view('livewire.admin.section', [
-            'sections' => $this->sections,
+        return view('livewire.admin.section',[
+            'sections' =>SectionService::getAllSections($this->perPage)
         ]);
     }
 }

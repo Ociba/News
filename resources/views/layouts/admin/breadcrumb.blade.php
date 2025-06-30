@@ -13,7 +13,7 @@
                         </ol>
                     </nav>--}}
                 </div>
-                <div class="col-lg-6 col-5 text-white text-right">
+                <div class="col-lg-6 col-5 text-white text-right text-capitalize">
                   {{ Request()->route()->getName()}}
                 </div>
             </div>
