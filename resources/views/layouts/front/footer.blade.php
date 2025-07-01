@@ -53,6 +53,6 @@
     <p class="m-0 text-center">&copy; <a href="#">Explore Africa</a>. All Rights Reserved.
 
         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "#!/credit-removal". Thank you for your support. ***/-->
-        Design by <a href="#!">Codex</a>
+        Design by <a href="https://www.kishanit.com">KishanIT</a>
     </p>
 </div>

@@ -16,6 +16,10 @@
                 <a href="" class="btn btn-sm btn-outline-secondary m-1">News</a>
                 <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
                 <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
+                <a href="" class="btn btn-sm btn-outline-secondary m-1">Life Style</a>
+                <a href="" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
+                <a href="" class="btn btn-sm btn-outline-secondary m-1">Technology</a>
+                <a href="" class="btn btn-sm btn-outline-secondary m-1">Farming</a>
             </div>
         </div>
     </div>

@@ -40,7 +40,7 @@
             </nav>
         </div>
     </div>
-    <div class="row align-items-center bg-white py-3 px-lg-5">
+    <div class="row align-items-center bg-white py-1 px-lg-5">
         <div class="col-lg-4">
             <a href="/" class="navbar-brand p-0 d-none d-lg-block">
                 <img class="img-fluid" src="{{ asset('asset/img/news.png')}}" style="height: 90px;" alt="">

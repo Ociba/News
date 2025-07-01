@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontPagesController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SectionController;
 
@@ -27,8 +28,8 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
-Route::get('/news/{category}', function () {return view('front.category');});
-Route::get('/news/{category}/details/{id}', function () {return view('front.category_details');});
+Route::get('/{category}',[FrontPagesController::class, 'category'])->name('News Category');
+Route::get('/details/{id}', [FrontPagesController::class, 'categoryDetails'])->name('Details');
 Route::get('/contact-us', function () {return view('front.contact_us');});
 
 Route::group(['middleware' => ['auth']], function () {

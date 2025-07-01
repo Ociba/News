@@ -10,7 +10,7 @@ class Slider extends Component
     public function render()
     {
         return view('livewire.welcome.section.slider',[
-            'slider_news'=>News::getCategory('slider')
+            'slider_news'=>News::getSection('slider')
         ]);
     }
 }

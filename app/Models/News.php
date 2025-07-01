@@ -33,7 +33,7 @@ class News extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'created_by');
     }
 
     public function scopeWithMinimalSelect($query)
@@ -44,13 +44,40 @@ class News extends Model
             'author:id,name',    // Only ID and district
         ]);
     }
-    public static function getCategory($section_name)
+    public static function getSection($section_name)
     {
         return self::withMinimalSelect()
             ->whereHas('section', fn ($q) => $q->where('section_name', $section_name))
             ->whereStatus('publish')
             ->latest()
             ->limit(4)
+            ->get();
+    }
+
+    public static function getSectionCategory($section_name)
+    {
+        return self::withMinimalSelect()
+            ->whereHas('section', fn ($q) => $q->where('section_name', $section_name))
+            ->whereStatus('publish')
+            ->latest()
+            ->limit(5)
+            ->get();
+    }
+
+    public static function getCategory($category,$perPage)
+    {
+        return self::withMinimalSelect()
+            ->whereHas('category', fn ($q) => $q->where('category', $category))
+            ->whereStatus('publish')
+            ->latest()
+            ->paginate($perPage);
+    }
+
+    public static function getCategoryNewsDetails($categoryId)
+    {
+        return self::withMinimalSelect()
+            ->whereId($categoryId)
+            ->whereStatus('publish')
             ->get();
     }
 }

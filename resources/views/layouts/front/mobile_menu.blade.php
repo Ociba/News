@@ -8,25 +8,25 @@
     <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
         <div class="navbar-nav mr-auto py-0">
             <a href="/" class="nav-item nav-link active">Home</a>
-            <a href="/news/politics" class="nav-item nav-link">Politics</a>
-            <a href="/news/travel" class="nav-item nav-link">Travel</a>
-            <a href="/news/tourism" class="nav-item nav-link">Tourism</a>
-            <a href="/new/business" class="nav-item nav-link">Business</a>
-            <a href="/news/health" class="nav-item nav-link">Health</a>
-            <a href="/news/life-style" class="nav-item nav-link">Life Style</a>
-            <a href="/news/entertainment" class="nav-item nav-link">Entertainment</a>
-            <a href="/news/sports" class="nav-item nav-link">Sports</a>
+            <a href="{{URL::signedRoute('News Category',['politics'])}}" class="nav-item nav-link">Politics</a>
+            <a href="{{URL::signedRoute('News Category',['travel'])}}" class="nav-item nav-link">Travel</a>
+            <a href="{{URL::signedRoute('News Category',['tourism'])}}" class="nav-item nav-link">Tourism</a>
+            <a href="{{URL::signedRoute('News Category',['business'])}}" class="nav-item nav-link">Business</a>
+            <a href="{{URL::signedRoute('News Category',['health'])}}" class="nav-item nav-link">Health</a>
+            <a href="{{URL::signedRoute('News Category',['life style'])}}" class="nav-item nav-link">Life Style</a>
+            <a href="{{URL::signedRoute('News Category',['entertainment'])}}" class="nav-item nav-link">Entertainment</a>
+            <a href="{{URL::signedRoute('News Category',['sports'])}}" class="nav-item nav-link">Sports</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More</a>
                 <div class="dropdown-menu rounded-0 m-0">
-                    <a href="/news/corporate" class="dropdown-item">Corporate</a>
-                    <a href="/news/education" class="dropdown-item">Education</a>
-                    <a href="/news/technology" class="dropdown-item">Technology</a>
-                    <a href="/news/culture" class="dropdown-item">Culture</a>
-                    <a href="/news/food" class="dropdown-item">Food</a>
+                    <a href="{{URL::signedRoute('News Category',['corporate'])}}" class="dropdown-item">Corporate</a>
+                    <a href="{{URL::signedRoute('News Category',['education'])}}" class="dropdown-item">Education</a>
+                    <a href="{{URL::signedRoute('News Category',['technology'])}}" class="dropdown-item">Technology</a>
+                    <a href="{{URL::signedRoute('News Category',['culture'])}}" class="dropdown-item">Culture</a>
+                    <a href="{{URL::signedRoute('News Category',['food'])}}" class="dropdown-item">Food</a>
                 </div>
             </div>
-            <a href="/news/farming" class="nav-item nav-link">Farming</a>
+            <a href="{{URL::signedRoute('News Category',['farming'])}}" class="nav-item nav-link">Farming</a>
         </div>
         {{--<div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
             <input type="text" class="form-control border-0" placeholder="Keyword">
