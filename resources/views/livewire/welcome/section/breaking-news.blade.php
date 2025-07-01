@@ -7,7 +7,7 @@
                 <div class="owl-carousel tranding-carousel position-relative d-inline-flex align-items-center ml-3"
                     style="width: calc(100% - 170px); padding-right: 90px;">
                     @foreach($breakings as $breaking)
-                    <div class="text-truncate"><a class="text-white text-uppercase font-weight-semi-bold" href="">{{$breaking->content}}</a></div>
+                    <div class="text-truncate"><a class="text-white text-uppercase font-weight-semi-bold" href="{{URL::signedRoute('More Details',[$breaking->id])}}">{{$breaking->content}}</a></div>
                     @endforeach
                 </div>
             </div>

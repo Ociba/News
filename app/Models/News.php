@@ -73,10 +73,10 @@ class News extends Model
             ->paginate($perPage);
     }
 
-    public static function getCategoryNewsDetails($categoryId)
+    public static function getMoreNewsDetails($newsId)
     {
         return self::withMinimalSelect()
-            ->whereId($categoryId)
+            ->whereId($newsId)
             ->whereStatus('publish')
             ->get();
     }

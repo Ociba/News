@@ -30,6 +30,7 @@ Route::post('/logout', function () {
 
 Route::get('/{category}',[FrontPagesController::class, 'category'])->name('News Category');
 Route::get('/details/{id}', [FrontPagesController::class, 'categoryDetails'])->name('Details');
+Route::get('/more-details/{id}', [FrontPagesController::class, 'moreDetails'])->name('More Details');
 Route::get('/contact-us', function () {return view('front.contact_us');});
 
 Route::group(['middleware' => ['auth']], function () {
