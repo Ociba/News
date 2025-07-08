@@ -80,4 +80,10 @@ class News extends Model
             ->whereStatus('publish')
             ->get();
     }
+    public static function getCategoryNewsDetails($categoryId){
+         return self::withMinimalSelect()
+            ->whereId($categoryId)
+            ->whereStatus('publish')
+            ->get();
+    }
 }

@@ -34,6 +34,18 @@
                             <i class="ni ni-single-02 text-default"></i>
                             <span class="nav-link-text">News</span>
                         </a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="/photos-to-sell">
+                            <i class="fas fa-image text-default"></i>
+                            <span class="nav-link-text">Photos To Sell</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/adverts">
+                            <i class="fas fa-bullhorn text-default"></i>
+                            <span class="nav-link-text">Adverts</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/gallery">

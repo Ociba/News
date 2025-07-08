@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
@@ -7,6 +8,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontPagesController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\PhotoSaleController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +23,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/users', [UsersController::class, 'users'])->name('Users');
+    Route::get('/section', [SectionController::class, 'section'])->name('Sections');
+    Route::get('/category', [CategoryController::class, 'category'])->name('Category');
+    Route::get('/news', [NewsController::class, 'news'])->name('All News');
+    Route::get('/adverts', [AdvertController::class, 'adverts'])->name('All Adverts');
+    Route::get('/photos-to-sell', [PhotoSaleController::class, 'photos'])->name('Photos');
 });
 Route::post('/logout', function () {
     Auth::logout();
@@ -33,9 +42,12 @@ Route::get('/details/{id}', [FrontPagesController::class, 'categoryDetails'])->n
 Route::get('/more-details/{id}', [FrontPagesController::class, 'moreDetails'])->name('More Details');
 Route::get('/contact-us', function () {return view('front.contact_us');});
 
-Route::group(['middleware' => ['auth']], function () {
+// Route::group(['middleware' => ['auth']], function () {
     Route::get('/users', [UsersController::class, 'users'])->name('Users');
     Route::get('/section', [SectionController::class, 'section'])->name('Sections');
     Route::get('/category', [CategoryController::class, 'category'])->name('Category');
     Route::get('/news', [NewsController::class, 'news'])->name('All News');
-});
+// });
+
+
+
