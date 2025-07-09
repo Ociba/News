@@ -27,7 +27,16 @@ class PhotoSaleService
         return $query->latest()->paginate($perPage);
     }
 
+    public static function getPhotosOnSale(){
+        return PhotosOnSell::with(['section', 'user', 'purchases'])->whereStatus('publish')->latest()->get();
+    }
 
+    public static function getAllPhotosOnSale($perPage){
+        return PhotosOnSell::with(['section', 'user', 'purchases'])->whereStatus('publish')
+        ->latest()->paginate($perPage);
+    }
+
+    
 
     public function getPhotoById($id)
     {

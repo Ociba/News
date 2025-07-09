@@ -20,27 +20,12 @@
         <div class="col-lg-3 col-md-6 mb-5">
             <h5 class="mb-4 text-white text-uppercase font-weight-bold">Categories</h5>
             <div class="m-n1">
-                <a href="" class="btn btn-sm btn-secondary m-1">Politics</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">News</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Corporate</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">News</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Health</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Education</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Science</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">News</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Foods</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Entertainment</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Travel</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Lifestyle</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Politics</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">News</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Corporate</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">News</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Health</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Education</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Science</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">News</a>
-                <a href="" class="btn btn-sm btn-secondary m-1">Foods</a>
+                @php
+                $categories =\App\Services\CategoryService::getAllCategories($perPage= null);
+                @endphp
+                @foreach($categories as $category)
+                <a href="{{URL::signedRoute('News Category',[$category->category])}}" class="btn btn-sm btn-secondary m-1">{{ $category->category }}</a>
+                @endforeach
             </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-5">

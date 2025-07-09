@@ -7,9 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class GalleryService
 {
-    public function getAllGalleries()
+    public static function getAllGalleries($perPage)
     {
-        return Gallery::latest()->get();
+        return Gallery::latest()->paginate($perPage);
+    }
+
+    public static function getGalleriesLimit(){
+        return Gallery::limit(6)->latest()->get();
     }
 
     public function findGallery(int $id)
@@ -17,7 +21,7 @@ class GalleryService
         return Gallery::findOrFail($id);
     }
 
-    public function createGallery(string $heading, string $image)
+    public static function createGallery(string $heading, string $image)
     {
         return Gallery::create([
             'heading'    => $heading,

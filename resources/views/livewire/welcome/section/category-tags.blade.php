@@ -6,20 +6,9 @@
         </div>
         <div class="bg-white border border-top-0 p-3">
             <div class="d-flex flex-wrap m-n1">
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">News</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">News</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">News</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Life Style</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Technology</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Farming</a>
+                @foreach($categories as $category)
+                <a href="{{URL::signedRoute('News Category',[$category->category])}}" class="btn btn-sm btn-outline-secondary m-1 capitalize">{{$category->category}}</a>
+                @endforeach
             </div>
         </div>
     </div>

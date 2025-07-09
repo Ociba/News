@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\PhotoPurchase;
 
 class User extends Authenticatable
 {
@@ -28,6 +29,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'user_type',
         'password',
     ];
 
@@ -71,5 +73,10 @@ class User extends Authenticatable
             ->orWhere('email', 'like', '%' . $search . '%');
         })
         ->orderBy($sortBy);
+    }
+
+    public function photoPurchases()
+    {
+        return $this->hasMany(PhotoPurchase::class,'buyer_id');
     }
 }

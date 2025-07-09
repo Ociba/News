@@ -14,7 +14,7 @@ class AdvertService
 
     public static function getActiveAdverts()
     {
-        return Advert::active()->with(['section', 'user'])->get();
+        return Advert::whereAdvertStatus('publish')->with(['section', 'user'])->latest()->get();
     }
 
     public static function getAdvertById($id)

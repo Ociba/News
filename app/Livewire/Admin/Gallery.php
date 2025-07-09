@@ -4,28 +4,31 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use App\Services\GalleryService;
+use Livewire\WithPagination;
 
 class Gallery extends Component
 {
-    public $galleries = [];
+   
+    use WithPagination;
 
-    protected GalleryService $galleryService;
+    protected $listeners = ['Gallery' => '$refresh'];
 
-    public function mount()
+    public $perPage = 10;
+    public $search = '';
+    public $sortBy = 'heading';
+
+
+    protected string $paginationTheme = 'bootstrap';
+
+    public function updatedSearch()
     {
-        $this->galleryService = new GalleryService();
-        $this->loadGalleries();
+        $this->resetPage();
     }
 
-    public function loadGalleries()
-    {
-        $this->galleries = $this->galleryService->getAllGalleries();
-    }
-
-    public function render()
-    {
-        return view('livewire.admin.gallery', [
-            'galleries' => $this->galleries,
-        ]);
-    }
+public function render()
+{
+    return view('livewire.admin.gallery', [
+        'galleries' => GalleryService::getAllGalleries($this->perPage)
+    ]);
+}
 }

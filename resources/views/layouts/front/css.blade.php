@@ -19,3 +19,4 @@
 
 <!-- Customized Bootstrap Stylesheet -->
 <link href="{{ asset('asset/css/style.css')}}" rel="stylesheet">
+@livewireStyles

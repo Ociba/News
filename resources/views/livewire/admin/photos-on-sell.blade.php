@@ -56,8 +56,8 @@
                             <th scope="col" class="sort" data-sort="name">Section</th>
                             <th scope="col" class="sort" data-sort="name">Title</th>
                             <th scope="col" class="sort" data-sort="name">Description</th>
-                            <th scope="col" class="sort" data-sort="name">With Watermark</th>
                             <th scope="col" class="sort" data-sort="name">Without Watermark</th>
+                            <th scope="col" class="sort" data-sort="name">With Watermark</th>
                             <th scope="col" class="sort" data-sort="budget">Price</th>
                             <th scope="col" class="sort" data-sort="budget">License Type</th>
                             <th scope="col" class="sort" data-sort="budget">Downloads</th>

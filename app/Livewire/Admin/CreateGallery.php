@@ -2,38 +2,57 @@
 
 namespace App\Livewire\Admin;
 
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 use App\Services\GalleryService;
+use Illuminate\Support\Facades\Session;
+use Livewire\WithFileUploads;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
-class CreateGallery extends Component
+class CreateGallery extends ModalComponent
 {
+    use WithFileUploads;
+
     public $heading;
     public $image;
+    public $uploadedImageName;
 
     protected $rules = [
         'heading' => 'required|string|max:255',
-        'image'   => 'required|string', // adjust if you handle file uploads
+        'image'   => 'required|image|max:2048', // 2MB Max
     ];
-
-    protected GalleryService $galleryService;
-
-    public function mount()
-    {
-        $this->galleryService = new GalleryService();
-    }
 
     public function createGallery()
     {
         $this->validate();
 
-        $this->galleryService->createGallery($this->heading, $this->image);
+        // Process and store the image
+        $this->processImage();
 
-        session()->flash('success', 'Gallery created successfully.');
+        // Create gallery with processed image
+        GalleryService::createGallery($this->heading, $this->uploadedImageName);
 
-        $this->reset(['heading', 'image']);
+        Session::flash('msg', 'Operation Successful');
+        $this->dispatch('Gallery', 'refreshComponent');
+        $this->closeModal();
+    }
 
-        // Optionally emit event or redirect
-        $this->emit('galleryCreated');
+    protected function processImage()
+    {
+        // Generate unique filename
+        $filename = Str::slug($this->heading) . '-' . time() . '.webp';
+        
+        // Process image using Intervention Image
+        $image = Image::make($this->image->getRealPath())
+            ->fit(800, 800) // Resize and crop to 800x800
+            ->encode('webp', 80); // Convert to WebP with 80% quality
+
+        // Store the processed image
+        Storage::disk('public')->put('gallery/' . $filename, $image);
+
+        // Save the filename for database storage
+        $this->uploadedImageName = $filename;
     }
 
     public function render()

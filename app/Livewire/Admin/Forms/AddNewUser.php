@@ -26,6 +26,7 @@ class AddNewUser extends ModalComponent
         User::create([
             'name' => $this->name,
             'email' => $this->email,
+            'user_type' => 'admin',
             'password' => Hash::make($this->password),
         ]);
 

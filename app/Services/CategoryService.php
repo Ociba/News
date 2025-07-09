@@ -14,6 +14,7 @@ class CategoryService
     {
         return Category::latest()->paginate($perPage);
     }
+    
 
     /**
      * Find a single category
