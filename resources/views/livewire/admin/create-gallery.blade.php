@@ -2,8 +2,6 @@
     <form wire:submit.prevent="createGallery">
         <div class="modal-header">
             <h5 class="modal-title">Create New Gallery</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" wire:click="$parent.closeModal()">
-                <span aria-hidden="true">×</span>
             </button>
         </div>
         <div class="modal-body">
@@ -27,7 +25,6 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" wire:click="$parent.closeModal()">Cancel</button>
             <button type="submit" class="btn btn-primary">Save Gallery</button>
         </div>
     </form>

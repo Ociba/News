@@ -4,31 +4,40 @@ namespace App\Livewire\Welcome\Section;
 
 use Livewire\Component;
 use App\Models\Advert;
+use Livewire\Attributes\On;
 
 class Advertisement extends Component
 {
-    public $adverts;
+    public $adverts = [];
     public $currentIndex = 0;
     public $interval = 3000; // 3 seconds in milliseconds
 
     public function mount()
     {
-        $this->adverts = Advert::get(); // Or however you get your adverts
+        $this->adverts = Advert::all()->toArray(); // Convert to array for safety
     }
 
     public function rotate()
     {
-        $this->currentIndex = ($this->currentIndex + 1) % count($this->adverts);
+        // Only rotate if we have adverts
+        if (!empty($this->adverts)) {
+            $this->currentIndex = ($this->currentIndex + 1) % count($this->adverts);
+        }
     }
 
     #[On('slider-start')] 
     public function startSlider()
     {
-        $this->dispatch('startSliderJS', interval: $this->interval);
+        // Only start slider if we have adverts
+        if (!empty($this->adverts)) {
+            $this->dispatch('startSliderJS', interval: $this->interval);
+        }
     }
 
     public function render()
     {
-        return view('livewire.welcome.section.advertisement');
+        return view('livewire.welcome.section.advertisement', [
+            'hasAdverts' => !empty($this->adverts)
+        ]);
     }
 }
