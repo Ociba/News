@@ -68,15 +68,15 @@
                         <span class="nav-link-text">Users</span>
                     </a>
                 </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="ni ni-send text-dark"></i>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <span class="nav-link-text"><button type="submit" class="">Logout</button></span>
-                            </form>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="ni ni-send text-dark"></i>
+                        <span class="nav-link-text">Logout</span>
+                    </a>
+                    <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
                 </ul>
             </div>
         </div>

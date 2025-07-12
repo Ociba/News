@@ -18,7 +18,16 @@
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center  ml-md-auto ">
                 
-                
+            <li class="nav-item d-xl-none">
+              <!-- Sidenav toggler -->
+              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </div>
+            </li>
                 
             </ul>
             <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
@@ -33,15 +42,16 @@
                             </div>
                         </div>
                     </a>
-                    <div class="dropdown-menu  dropdown-menu-right ">
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <i class="ni ni-user-run"></i> <span class="nav-link-text"><button type="submit" class="">Logout</button></span>
-                            </form>
-                        </a>
-                    </div>
+                    <div class="dropdown-menu dropdown-menu-right">
+    <div class="dropdown-divider"></div>
+    <form method="POST" action="{{ route('logout') }}" class="w-100">
+        @csrf
+        <button type="submit" class="dropdown-item bg-transparent border-0 w-100 text-start">
+            <i class="ni ni-user-run"></i>
+            <span class="nav-link-text">Logout</span>
+        </button>
+    </form>
+</div>
                 </li>
             </ul>
         </div>

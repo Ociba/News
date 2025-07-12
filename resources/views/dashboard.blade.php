@@ -2,5 +2,6 @@
 
 @section('content')
 
+@livewire('admin.cards')
 
 @endsection
