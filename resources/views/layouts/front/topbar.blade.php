@@ -1,3 +1,55 @@
+<style>
+    .image-text-slider {
+    position: relative;
+    width: 100%;
+    height: 150px; /* Adjust based on your needs */
+    overflow: hidden;
+}
+
+.slide2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide2.active {
+    opacity: 1;
+}
+
+.slide2 img {
+    max-height: 80px;
+    width: auto;
+}
+
+.slide-text {
+    width: 50%;
+    padding: 0 20px;
+    text-align: left;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .slide2 {
+        flex-direction: column;
+    }
+    
+    .slide2 img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .slide-text {
+        width: 100%;
+        padding: 10px 0;
+        text-align: center;
+    }
+}
+</style>
 <div class="container-fluid d-none d-lg-block">
     <div class="row align-items-center bg-dark px-lg-5">
         <div class="col-lg-9">
@@ -41,13 +93,62 @@
         </div>
     </div>
     <div class="row align-items-center bg-white py-1 px-lg-5">
-        <div class="col-lg-4">
-            <a href="/" class="navbar-brand p-0 d-none d-lg-block">
-                <img class="img-fluid" src="{{ asset('asset/img/news.png')}}" style="height: 90px;" alt="">
-            </a>
-        </div>
-        <div class="col-lg-8 text-center text-lg-right">
-            <a href="#!"><img class="img-fluid" src="{{ asset('asset/img/ads.png')}}" alt=""></a>
+    <div class="col-lg-4">
+        <a href="/" class="navbar-brand p-0 d-none d-lg-block">
+            <img class="img-fluid" src="{{ asset('asset/img/news.png')}}" style="height: 90px;" alt="">
+        </a>
+    </div>
+    
+    <div class="col-lg-8 text-center text-lg-right">
+        <!-- Image/text slider container -->
+        <div class="image-text-slider">
+            <!-- Slide 1 -->
+            <div class="slide2 active">
+                <img class="img-fluid" src="{{ asset('asset/img/elgon.jpg')}}"  style="width:100%" alt="Advertisement 1">
+                <div class="slide-text">
+                    <h5>Mountain Elgon</h5>
+                    <p>Get 20% off on all products this week only!</p>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide2">
+                <img class="img-fluid" src="{{ asset('asset/img/ads.png')}}" alt="Advertisement 2">
+                <div class="slide-text">
+                    <h5>New Arrivals</h5>
+                    <p>Check out our latest collection just arrived!</p>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide2">
+                <img class="img-fluid" src="{{ asset('asset/img/hotsprings.jpeg')}}" style="width:100%" alt="Advertisement 3">
+                <div class="slide-text">
+                    <h5>Uganda Hotsprings</h5>
+                    <p>Don't miss our exclusive deals ending soon!</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.slide2');
+    let currentSlide = 0;
+    
+    function nextSlide() {
+        // Hide current slide
+        slides[currentSlide].classList.remove('active');
+        
+        // Move to next slide
+        currentSlide = (currentSlide + 1) % slides.length;
+        
+        // Show next slide
+        slides[currentSlide].classList.add('active');
+    }
+    
+    // Start the slider (change 3000 to adjust interval in milliseconds)
+    setInterval(nextSlide, 3000);
+});
+</script>

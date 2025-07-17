@@ -20,3 +20,12 @@
 <!-- Customized Bootstrap Stylesheet -->
 <link href="{{ asset('asset/css/style.css')}}" rel="stylesheet">
 @livewireStyles
+<style>
+    .youtube-icon {
+    transition: transform 0.3s ease;
+    }
+    .youtube-icon:hover {
+        transform: scale(1.2);
+        color: #ff0000 !important;
+    }
+</style>

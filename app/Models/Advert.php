@@ -12,6 +12,7 @@ class Advert extends Model
 
     protected $fillable = [
         'section_id',
+        'category_id',
         'image',
         'start_date',
         'end_date',
@@ -36,6 +37,11 @@ class Advert extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public static function scopeActive($query)
