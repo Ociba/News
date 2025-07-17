@@ -12,11 +12,12 @@ class FrontPagesController extends Controller
         return view('front.category', compact('category'));
     }
 
-    public function categoryDetails($categoryId){
+    public function categoryDetails($newsId){
         if (! request()->hasValidSignature()) {
             abort(401);
         }
-        return view('front.category_details', compact('categoryId'));
+
+        return view('front.category_details', compact('newsId'));
     }
 
     public function moreDetails($newsId){

@@ -13,7 +13,7 @@
                         <div class="owl-carousel tranding-carousel position-relative d-inline-flex align-items-center bg-white border border-left-0"
                             style="width: calc(100% - 180px); padding-right: 100px;">
                             @foreach($trendings as $trend)
-                            <div class="text-truncate"><a class="text-secondary text-uppercase font-weight-semi-bold" href="#">{{ $trend->content }}</a></div>
+                            <div class="text-truncate"><a class="text-secondary text-uppercase font-weight-semi-bold" href="#">  {{ strip_tags($trend->content) }}</a></div>
                             @endforeach
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                                 <a class="text-body" href="#">{{ $detail->created_at->format('l d F, Y ') }}</a>
                             </div>
                             <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{ $detail->title }}</h1>
-                            <p>{{ $detail->content }}</p>
+                            <p class="mt-2">{!! $detail->content !!}</p>
                         </div>
                         <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
                             <div class="d-flex align-items-center">
@@ -62,40 +62,27 @@
                     <!-- Comment List Start -->
                     <div class="mb-3">
                         <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">3 Comments</h4>
+                            <h4 class="m-0 text-uppercase font-weight-bold">
+                                {{ $detail->comments->count() }} Comment{{ $detail->comments->count() !== 1 ? 's' : '' }}
+                            </h4>
                         </div>
+
                         <div class="bg-white border border-top-0 p-4">
-                            <div class="media mb-4">
-                                <img src="{{ asset('asset/img/user.jpg')}}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                <div class="media-body">
-                                    <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                                    <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                        accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    <button class="btn btn-sm btn-outline-secondary">Reply</button>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <img src="{{ asset('asset/img/user.jpg')}}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                <div class="media-body">
-                                    <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                                    <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                        accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    <button class="btn btn-sm btn-outline-secondary">Reply</button>
-                                    <div class="media mt-4">
-                                        <img src="{{ asset('asset/img/user.jpg')}}" alt="Image" class="img-fluid mr-3 mt-1"
-                                            style="width: 45px;">
-                                        <div class="media-body">
-                                            <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor
-                                                labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed
-                                                eirmod ipsum.</p>
-                                            <button class="btn btn-sm btn-outline-secondary">Reply</button>
-                                        </div>
+                            @foreach($detail->comments as $comment)
+                                <div class="media mb-4">
+                                    <img src="{{ asset('user.webp') }}" alt="User" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                    <div class="media-body">
+                                        <h6>
+                                            <a class="text-secondary font-weight-bold" href="#">{{ $comment->name }}</a>
+                                            <small><i>{{ $comment->created_at->format('d M Y') }}</i></small>
+                                        </h6>
+                                        <p>{{ $comment->message }}</p>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
+
                     <!-- Comment List End -->
 
                     <!-- Comment Form Start -->
@@ -104,33 +91,41 @@
                             <h4 class="m-0 text-uppercase font-weight-bold">Leave a comment</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-4">
-                            <form>
+                        @if(session('success'))
+                            <div class="alert alert-success mb-4">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                            <form wire:submit.prevent="submitComment">
                                 <div class="form-row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="name">Name *</label>
-                                            <input type="text" class="form-control" id="name">
+                                            <input type="text" class="form-control" id="name" wire:model="name">
                                         </div>
+                                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="email">Email *</label>
-                                            <input type="email" class="form-control" id="email">
+                                            <input type="email" class="form-control" id="email" wire:model="email">
                                         </div>
+                                        @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="website">Website</label>
-                                    <input type="url" class="form-control" id="website">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="message">Message *</label>
-                                    <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea id="message" cols="30" rows="5" class="form-control" wire:model="message"></textarea>
+                                    @error('message') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group mb-0">
-                                    <input type="submit" value="Leave a comment"
-                                        class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                                    <button type="submit" class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                                        <span wire:loading wire:target="submitComment">
+                                            <i class="fa fa-spinner fa-spin"></i> Submitting Comment, please wait .....
+                                        </span>
+                                        <span wire:loading.remove wire:target="submitComment">Submit Comment</span>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -174,14 +169,7 @@
                     <!-- Social Follow End -->
 
                     <!-- Ads Start -->
-                    <div class="mb-3">
-                        <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Advertisement</h4>
-                        </div>
-                        <div class="bg-white text-center border border-top-0 p-3">
-                            <a href=""><img class="img-fluid" src="{{ asset('asset/img/news-800x500-2.jpg')}}" alt=""></a>
-                        </div>
-                    </div>
+                    @livewire('welcome.section.advertisement')
                     <!-- Ads End -->
 
                     <!-- Popular News Start -->
@@ -225,25 +213,7 @@
                     <!-- Newsletter End -->
 
                     <!-- Tags Start -->
-                    <div class="mb-3">
-                        <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Tags</h4>
-                        </div>
-                        <div class="bg-white border border-top-0 p-3">
-                            <div class="d-flex flex-wrap m-n1">
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
-                                <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
-                            </div>
-                        </div>
-                    </div>
+                    @livewire('welcome.section.category-tags')
                     <!-- Tags End -->
                 </div>
             </div>

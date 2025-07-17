@@ -2,6 +2,6 @@
 
 @section('content')
 
-@livewire('front.category-details',['categoryId'=>$categoryId])
+@livewire('front.category-details',['newsId'=>$newsId])
 
 @endsection

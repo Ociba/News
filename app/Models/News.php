@@ -36,6 +36,11 @@ class News extends Model
         return $this->belongsTo(User::class,'created_by');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->latest();
+    }
+
     public function scopeWithMinimalSelect($query)
     {
         return $query->with([         // Only ID and name
@@ -80,9 +85,9 @@ class News extends Model
             ->whereStatus('publish')
             ->get();
     }
-    public static function getCategoryNewsDetails($categoryId){
+    public static function getCategoryNewsDetails($newsId){
          return self::withMinimalSelect()
-            ->whereId($categoryId)
+             ->where('id', $newsId)
             ->whereStatus('publish')
             ->get();
     }
