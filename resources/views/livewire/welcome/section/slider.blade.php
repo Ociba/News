@@ -7,10 +7,10 @@
             <div class="overlay">
                 <div class="mb-2">
                     <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                        href="{{URL::signedRoute('More Details',[$slider->id])}}">{{ $slider->category->category }}</a>
-                    <a class="text-white" href="{{URL::signedRoute('More Details',[$slider->id])}}">{{ $slider->created_at->format('l d F, Y h:i A') }}</a>
+                        href="{{URL::signedRoute('Details',[$slider->id])}}">{{ $slider->category->category }}</a>
+                    <a class="text-white" href="{{URL::signedRoute('Details',[$slider->id])}}">{{ $slider->created_at->format('l d F, Y h:i A') }}</a>
                 </div>
-                <a class="h2 m-0 text-white text-uppercase font-weight-bold" href="{{URL::signedRoute('More Details',[$slider->id])}}">{{ $slider->content }}</a>
+                <a class="h2 m-0 text-white text-uppercase font-weight-bold" href="{{URL::signedRoute('Details',[$slider->id])}}">{{ $slider->content }}</a>
             </div>
         </div>
         @endforeach

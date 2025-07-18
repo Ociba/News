@@ -10,10 +10,10 @@
             <div class="overlay">
                 <div class="mb-2">
                     <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                        href="{{URL::signedRoute('More Details',[$feature->id])}}">{{ $feature->category->category }}</a>
-                    <a class="text-white" href="{{URL::signedRoute('More Details',[$feature->id])}}"><small>{{ $feature->created_at->format('l d F, Y ') }}</small></a>
+                        href="{{URL::signedRoute('Details',[$feature->id])}}">{{ $feature->category->category }}</a>
+                    <a class="text-white" href="{{URL::signedRoute('Details',[$feature->id])}}"><small>{{ $feature->created_at->format('l d F, Y ') }}</small></a>
                 </div>
-                <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold" href="{{URL::signedRoute('More Details',[$feature->id])}}">{{ $feature->title }}</a>
+                <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold" href="{{URL::signedRoute('Details',[$feature->id])}}">{{ $feature->title }}</a>
             </div>
         </div>
         @endforeach

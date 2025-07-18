@@ -41,6 +41,11 @@ class News extends Model
         return $this->hasMany(Comment::class)->latest();
     }
 
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'publish');
+    }
+    
     public function scopeWithMinimalSelect($query)
     {
         return $query->with([         // Only ID and name

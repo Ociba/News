@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\URL;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Features\SupportRedirects\Redirector;
+use Carbon\Carbon;
 
 class MorePhotosToSell extends Component
 {
@@ -26,19 +27,35 @@ class MorePhotosToSell extends Component
 
         $photo = PhotosOnSell::findOrFail($photoId);
 
-        // Verify purchase
-        $hasPaid = PhotoPurchase::where('photo_id', $photo->id)
+        // Allow admin to bypass payment check (if needed)
+        if (Auth::user()->user_type === 'admin') {
+            return $this->processDownload($photo);
+        }
+
+        // Verify purchase with additional checks
+        $purchase = PhotoPurchase::where('photo_id', $photo->id)
             ->where('buyer_id', Auth::id())
             ->where('status', 'completed')
-            ->exists();
+            ->first();
 
-        if (!$hasPaid) {
+        if (!$purchase) {
             $this->dispatch('notify', type: 'error', message: 'You must purchase this photo before downloading.');
             return redirect()->away(
                 URL::signedRoute('photo.checkout', ['photo' => $photo->id])
             );
         }
 
+        // Check if download has expired (if you have expiration logic)
+        if ($purchase->download_expires_at && Carbon::now()->gt($purchase->download_expires_at)) {
+            $this->dispatch('notify', type: 'error', message: 'Your download link has expired.');
+            return redirect()->back();
+        }
+
+        return $this->processDownload($photo);
+    }
+
+    protected function processDownload($photo): BinaryFileResponse|RedirectResponse
+    {
         // Increment download count
         $photo->increment('download_count');
 

@@ -14,10 +14,10 @@
             <img class="img-fluid" src="{{ asset('storage/news/photo/'.$new->photo)}}" alt="">
             <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                 <div class="mb-2">
-                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="{{URL::signedRoute('More Details',[$new->id])}}">{{ $new->category->category }}</a>
-                    <a class="text-body" href="{{URL::signedRoute('More Details',[$new->id])}}"><small>{{ $new->created_at->format('l d F, Y ') }}</small></a>
+                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="{{URL::signedRoute('Details',[$new->id])}}">{{ $new->category->category }}</a>
+                    <a class="text-body" href="{{URL::signedRoute('Details',[$new->id])}}"><small>{{ $new->created_at->format('l d F, Y ') }}</small></a>
                 </div>
-                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="{{URL::signedRoute('More Details',[$new->id])}}">{{ Str::limit($new->title,25) }}</a>
+                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="{{URL::signedRoute('Details',[$new->id])}}">{{ Str::limit($new->title,25) }}</a>
             </div>
         </div>
         @endforeach

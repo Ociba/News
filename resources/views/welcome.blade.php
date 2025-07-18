@@ -72,7 +72,7 @@
                     <!-- Popular News End -->
 
                     <!-- Newsletter Start -->
-                    @livewire('welcome.section.news-letter')
+                    {{--@livewire('welcome.section.news-letter')--}}
                     <!-- Newsletter End -->
 
                     <!-- Tags Start -->

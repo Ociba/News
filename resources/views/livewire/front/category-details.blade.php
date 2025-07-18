@@ -13,7 +13,7 @@
                         <div class="owl-carousel tranding-carousel position-relative d-inline-flex align-items-center bg-white border border-left-0"
                             style="width: calc(100% - 180px); padding-right: 100px;">
                             @foreach($trendings as $trend)
-                            <div class="text-truncate"><a class="text-secondary text-uppercase font-weight-semi-bold" href="#">  {{ strip_tags($trend->content) }}</a></div>
+                            <div class="text-truncate"><a class="text-secondary text-uppercase font-weight-semi-bold" href="{{URL::signedRoute('Details',[$trend->id])}}"><i class="fa fa-check"></i>  {{ strip_tags($trend->content) }}</a></div>
                             @endforeach
                         </div>
                     </div>
@@ -195,21 +195,7 @@
                     <!-- Popular News End -->
 
                     <!-- Newsletter Start -->
-                    <div class="mb-3">
-                        <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Newsletter</h4>
-                        </div>
-                        <div class="bg-white text-center border border-top-0 p-3">
-                            <p>Aliqu justo et labore at eirmod justo sea erat diam dolor diam vero kasd</p>
-                            <div class="input-group mb-2" style="width: 100%;">
-                                <input type="text" class="form-control form-control-lg" placeholder="Your Email">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary font-weight-bold px-3">Sign Up</button>
-                                </div>
-                            </div>
-                            <small>Lorem ipsum dolor sit amet elit</small>
-                        </div>
-                    </div>
+                    @livewire('welcome.section.news-letter')
                     <!-- Newsletter End -->
 
                     <!-- Tags Start -->
