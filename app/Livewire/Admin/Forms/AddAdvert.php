@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Forms;
 
+use App\Models\Category;
 use Livewire\WithFileUploads;
 use LivewireUI\Modal\ModalComponent;
 use App\Services\AdvertService;
@@ -20,10 +21,12 @@ class AddAdvert extends ModalComponent
     public $start_date;
     public $end_date;
     public $user_id;
+    public $category_id;
     public $advert_status = 'publish';
 
     protected $rules = [
         'section_id' => 'required|exists:sections,id',
+        'category_id' => 'required',
         'image' => 'required|image|max:2048', // 2MB max
         'start_date' => 'required|date',
         'end_date' => 'required|date|after_or_equal:start_date',
@@ -48,6 +51,7 @@ class AddAdvert extends ModalComponent
             // Save only the file name (not the full path) to DB
             AdvertService::createAdvert([
                 'section_id' => $this->section_id,
+                'category_id' =>$this->category_id,
                 'image' => $fileName,
                 'start_date' => $this->start_date,
                 'end_date' => $this->end_date,
@@ -68,7 +72,8 @@ class AddAdvert extends ModalComponent
     public function render()
     {
         return view('livewire.admin.forms.add-advert', [
-            'sections' => Section::all(),
+            'sections' => Section::get(),
+            'categories' =>Category::get()
         ]);
     }
 }

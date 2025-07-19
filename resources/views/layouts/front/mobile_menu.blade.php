@@ -27,6 +27,7 @@
                     <a href="{{URL::signedRoute('News Category',['opinion'])}}" class="dropdown-item">Opinion</a>
                     <a href="{{URL::signedRoute('News Category',['sports'])}}" class="dropdown-item">Sports</a>
                     <a href="{{URL::signedRoute('News Category',['opinion'])}}" class="dropdown-item">Opinion</a>
+                    <a href="{{URL::signedRoute('News Category',['gossip'])}}" class="dropdown-item">Gossip</a>
                     <a href="{{URL::signedRoute('News Category',['development'])}}" class="dropdown-item">Development</a>
                     <a href="{{URL::signedRoute('News Category',['corporate'])}}" class="dropdown-item">Corporate</a>
                     <a href="{{URL::signedRoute('News Category',['education'])}}" class="dropdown-item">Education</a>
@@ -36,7 +37,7 @@
                     <a href="{{URL::signedRoute('News Category',['farming'])}}" class="dropdown-item">Farming</a>
                 </div>
             </div>
-            <a href="{{URL::signedRoute('News Category',['gossip'])}}" class="nav-item nav-link">Gossip</a>
+            <a href="{{URL::signedRoute('News Category',['pdm'])}}" class="nav-item nav-link">PDM</a>
         </div>
         {{--<div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
             <input type="text" class="form-control border-0" placeholder="Keyword">

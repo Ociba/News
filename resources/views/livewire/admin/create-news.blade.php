@@ -37,13 +37,18 @@
                     </div>
 
                     <div class="form-group col-md-6">
+                        <label>Youtube Link (Optional)</label>
+                        <input type="text" wire:model="youtube_link" id="youtube_link" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
                         <label>Photo</label>
                         <input type="file" wire:model="photo" id="photo" class="form-control">
                         <div wire:loading wire:target="photo" style="color:green;"><strong>Uploading Photo, Please Wait...</strong></div>
                         @error('photo') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label>Content</label>

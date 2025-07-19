@@ -33,6 +33,7 @@ class NewsService
             'category_id' => $data['category_id'],
             'section_id'  => $data['section_id'],
             'title'       => $data['title'],
+            'youtube_link' => $data['youtube_link'],
             'slug'        => Str::slug($data['title']),
             'content'     => $data['content'],
             'photo'       => $data['photo'], // ensure you've already uploaded or validated this

@@ -16,6 +16,7 @@ class News extends Model
         'slug',
         'content',
         'photo',
+        'youtube_link',
         'status',
         'created_by',
     ];

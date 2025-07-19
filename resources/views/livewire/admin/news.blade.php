@@ -71,7 +71,7 @@
                             <td scope="row" class="text-capitalize">{{$new->category->category}}</td>
                             <td scope="row" class="text-capitalize">{{$new->section->section_name}}</td>
                             <td scope="row">{{$new->title}}</td>
-                            <td scope="row">{{$new->content}}</td>
+                            <td scope="row">{{ Str::limit($new->content, 50)}}</td>
                             <td><img src="{{ asset('storage/news/photo/'.$new->photo)}}"></td>
                             <td scope="row">{{$new->status}}</td>
                             <td class="budget">{{$new->author->name}}</td>

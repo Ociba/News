@@ -22,20 +22,30 @@
                         </select>
                         @error('section_id') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-
                     <div class="form-group col-md-6">
+                        <label for="section_id">Category</label>
+                        <select wire:model="category_id" class="form-control" id="category_id">
+                            <option value="">Select Category</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->category }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="form-group col-md-6">
                         <label for="start_date">Start Date</label>
                         <input type="date" wire:model="start_date" class="form-control" id="start_date">
                         @error('start_date') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-md-6">
                         <label for="end_date">End Date</label>
                         <input type="date" wire:model="end_date" class="form-control" id="end_date">
                         @error('end_date') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-
+                </div>
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label for="advert_status">Status</label>
                         <select wire:model="advert_status" class="form-control" id="advert_status">
@@ -45,9 +55,7 @@
                         </select>
                         @error('advert_status') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                         <label for="image">Advert Image</label>
                         <input type="file" wire:model="image" class="form-control" id="image">
                         @error('image') <span class="text-danger">{{ $message }}</span> @enderror

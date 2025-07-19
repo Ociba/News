@@ -63,6 +63,7 @@ Route::post('/logout', function () {
 
 Route::get('/details/{id}', [FrontPagesController::class, 'newsDetails'])->name('Details');
 Route::get('/contact-us', function () {return view('front.contact_us');});
+Route::get('/about-us', function () {return view('front.about_us');});
 Route::get('/more-photos', [PhotoSaleController::class, 'morePhotos'])->name('More Photos');
 
 Route::get('/{category}',[FrontPagesController::class, 'category'])->name('News Category');

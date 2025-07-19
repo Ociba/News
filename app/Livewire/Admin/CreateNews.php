@@ -14,13 +14,14 @@ class CreateNews extends ModalComponent
 {
     use savePhotosToNewsFolder,WithFileUploads;
 
-    public $title, $content, $category_id, $section_id, $photo, $status = 'publish';
+    public $title, $content, $category_id, $section_id, $photo, $youtube_link, $status = 'publish';
     public $categories;
     public $sections;
 
     protected $rules = [
         'title'       => 'required|string|max:255',
         'content'     => 'required|string',
+        'youtube_link' =>'nullable|url',
         'category_id' => 'required|exists:categories,id',
         'section_id'  => 'required|exists:sections,id',
         'photo'       => 'required|unique:news|mimes:jpeg,png,jpg,webp|max:10240',
@@ -43,12 +44,12 @@ class CreateNews extends ModalComponent
         NewsService::createNews([
             'title'       => $this->title,
             'content'     => $this->content,
+            'youtube_link' =>$this->youtube_link,
             'category_id' => $this->category_id,
             'section_id'  => $this->section_id,
             'photo'       => $savedFileName,
             'status'      => $this->status,
         ]);
-
         Session::flash('msg', 'Operation Succesful');
         $this->dispatch('News', 'refreshComponent');
         $this->closeModal();

@@ -13,7 +13,7 @@
                         <div class="owl-carousel tranding-carousel position-relative d-inline-flex align-items-center bg-white border border-left-0"
                             style="width: calc(100% - 180px); padding-right: 100px;">
                             @foreach($trendings as $trend)
-                            <div class="text-truncate"><a class="text-secondary text-uppercase font-weight-semi-bold" href="{{URL::signedRoute('Details',[$trend->id])}}"><i class="fa fa-check"></i>  {{ strip_tags($trend->content) }}</a></div>
+                            <div class="text-truncate"><a class="text-secondary text-uppercase font-weight-semi-bold" href="{{URL::signedRoute('Details',[$trend->id])}}"><i class="fa fa-check"></i> {{ strip_tags($trend->content) }}</a></div>
                             @endforeach
                         </div>
                     </div>
@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <!-- News Detail Start -->
-                     @foreach($details as $detail)
+                    @foreach($details as $detail)
                     <div class="position-relative mb-3">
                         <img class="img-fluid w-100" src="{{ asset('storage/news/photo/'.$detail->photo)}}" style="object-fit: cover;">
                         <div class="bg-white border border-top-0 p-4">
@@ -44,11 +44,17 @@
                         </div>
                         <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
                             <div class="d-flex align-items-center">
-                            <a href="https://youtube.com/your-channel-name" target="_blank" class="ml-3 text-danger" title="Our YouTube Channel">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                </svg>
-                            </a>
+                                <a
+                                    href="{{ $detail->youtube_link ?? 'javascript:void(0)' }}"
+                                    target="_blank"
+                                    class="ml-3 {{ $detail->youtube_link ? 'text-danger' : 'text-secondary opacity-50' }}"
+                                    title="{{ $detail->youtube_link ? 'Our YouTube Channel' : 'No YouTube link' }}"
+                                    @if(!$detail->youtube_link) style="pointer-events: none; cursor: default;" @endif
+                                    >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                                    </svg>
+                                </a>
                             </div>
                             <div class="d-flex align-items-center">
                                 <span class="ml-3"><i class="far fa-eye mr-2"></i>12345</span>
@@ -69,16 +75,16 @@
 
                         <div class="bg-white border border-top-0 p-4">
                             @foreach($detail->comments as $comment)
-                                <div class="media mb-4">
-                                    <img src="{{ asset('user.webp') }}" alt="User" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                    <div class="media-body">
-                                        <h6>
-                                            <a class="text-secondary font-weight-bold" href="#">{{ $comment->name }}</a>
-                                            <small><i>{{ $comment->created_at->format('d M Y') }}</i></small>
-                                        </h6>
-                                        <p>{{ $comment->message }}</p>
-                                    </div>
+                            <div class="media mb-4">
+                                <img src="{{ asset('user.webp') }}" alt="User" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                <div class="media-body">
+                                    <h6>
+                                        <a class="text-secondary font-weight-bold" href="#">{{ $comment->name }}</a>
+                                        <small><i>{{ $comment->created_at->format('d M Y') }}</i></small>
+                                    </h6>
+                                    <p>{{ $comment->message }}</p>
                                 </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -91,11 +97,11 @@
                             <h4 class="m-0 text-uppercase font-weight-bold">Leave a comment</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-4">
-                        @if(session('success'))
+                            @if(session('success'))
                             <div class="alert alert-success mb-4">
                                 {{ session('success') }}
                             </div>
-                        @endif
+                            @endif
                             <form wire:submit.prevent="submitComment">
                                 <div class="form-row">
                                     <div class="col-sm-6">
@@ -180,7 +186,7 @@
                         <div class="bg-white border border-top-0 p-3">
                             @foreach($trendings as $trend)
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{{ asset('storage/news/photo/'.$trend->photo)}}" alt=""  style="width:100px;width:120px;">
+                                <img class="img-fluid" src="{{ asset('storage/news/photo/'.$trend->photo)}}" alt="" style="width:100px;width:120px;">
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="#">{{ $trend->category->category }}</a>
