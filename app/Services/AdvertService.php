@@ -17,6 +17,12 @@ class AdvertService
         return Advert::whereAdvertStatus('publish')->with(['section', 'user'])->latest()->get();
     }
 
+    public static function getCurrentlyActiveAdverts()
+    {
+        return Advert::active()->with(['section', 'user'])->latest()->get();
+    }
+
+
     public static function getAdvertById($id)
     {
         return Advert::with(['section', 'user'])->findOrFail($id);

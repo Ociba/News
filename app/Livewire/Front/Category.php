@@ -31,7 +31,7 @@ class Category extends Component
     private function getCategoryAdvert()
     {
         $categoryId = \App\Models\Category::whereCategory($this->category)->value('id');
-        return Advert::whereCategoryId($categoryId)->get();
+        return Advert::whereCategoryId($categoryId)->active()->get();
     }
 
     #[On('startSliderJS')]

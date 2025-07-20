@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class NewsController extends Controller
 {
@@ -43,15 +44,24 @@ class NewsController extends Controller
     /**
      * Get news by category with pagination
      */
-    public function getByCategory($category, Request $request)
+    public function getByCategory($categoryName, Request $request)
     {
         $perPage = $request->input('per_page', 5);
-        
-        $news = News::getCategory($category, $perPage);
+
+        // Fetch category by name or slug
+        $category = Category::where('name', $categoryName)->firstOrFail();
+
+        // Fetch news items
+        $news = News::getCategory($category->name, $perPage);
+
+        // Fetch active adverts for this category
+        $adverts = $category->adverts()->active()->get();
 
         return response()->json([
             'success' => true,
-            'data' => $news
+            'category' => $category->name,
+            'adverts' => $adverts,
+            'news' => $news,
         ]);
     }
 

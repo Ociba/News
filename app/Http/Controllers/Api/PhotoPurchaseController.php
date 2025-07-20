@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class PhotoPurchaseController extends Controller
 {
@@ -84,6 +85,7 @@ class PhotoPurchaseController extends Controller
             'photo_id' => $photo->id,
             'buyer_id' => $user->id,
             'amount' => $photo->price,
+            'transaction_id' => uniqid('txn_', true),
             'payment_method' => $request->payment_method,
             'status' => 'completed', // In real app, this would be pending until payment confirmation
             'download_expires_at' => now()->addDays(30),
@@ -124,41 +126,54 @@ class PhotoPurchaseController extends Controller
         // Increment download count
         $photo->incrementDownloadCount();
 
-        // Get file path
-        $filePath = 'photos/' . $photo->image_without_watermark;
+       
+        $disk = Storage::disk('public'); // use 'public' disk
 
-        if (!Storage::exists($filePath)) {
+        $filePath = 'photos/' . $photo->image_without_watermark;
+        
+        if (!$disk->exists($filePath)) {
             return response()->json([
                 'success' => false,
                 'message' => 'File not found'
             ], 404);
         }
-
+        
+        $fileFullPath = $disk->path($filePath);
+        
         return response()->download(
-            storage_path('app/' . $filePath),
+            $fileFullPath,
             $photo->slug . '.' . pathinfo($photo->image_without_watermark, PATHINFO_EXTENSION),
             [
                 'Content-Type' => 'image/' . pathinfo($photo->image_without_watermark, PATHINFO_EXTENSION)
             ]
         );
+        
     }
 
     /**
      * Get user's purchased photos
      */
     public function myPurchases()
-    {
-        $user = Auth::guard('api')->user();
-        
-        $purchases = PhotoPurchase::with(['photo', 'photo.section'])
-            ->where('buyer_id', $user->id)
-            ->completed()
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+{
 
+    $user = Auth::guard('api')->user();
+
+    if (!$user) {
         return response()->json([
-            'success' => true,
-            'data' => $purchases
-        ]);
+            'success' => false,
+            'message' => 'Unauthorized'
+        ], 401);
     }
+
+    $purchases = PhotoPurchase::with(['photo', 'photo.section'])
+        ->where('buyer_id', $user->id)
+        ->completed()
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+        
+    return response()->json([
+        'success' => true,
+        'data' => $purchases
+    ]);
+}
 }

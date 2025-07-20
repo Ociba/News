@@ -3,7 +3,7 @@
 namespace App\Livewire\Welcome\Section;
 
 use Livewire\Component;
-use App\Models\Advert;
+use App\Services\AdvertService;
 use Livewire\Attributes\On;
 
 class Advertisement extends Component
@@ -14,7 +14,7 @@ class Advertisement extends Component
 
     public function mount()
     {
-        $this->adverts = Advert::all()->toArray(); // Convert to array for safety
+        $this->adverts = AdvertService::getCurrentlyActiveAdverts()->toArray();
     }
 
     public function rotate()

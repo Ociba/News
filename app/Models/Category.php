@@ -17,6 +17,12 @@ class Category extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function adverts()
+    {
+        return $this->hasMany(Advert::class);
+    }
+
+
     public function scopeSearchAndSort($query, $search, $sortBy)
     {
         return $query->where(function ($q) use ($search) {
