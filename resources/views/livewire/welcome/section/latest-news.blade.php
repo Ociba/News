@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="section-title">
                 <h4 class="m-0 text-uppercase font-weight-bold">Latest News</h4>
-                <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a>
+                <a class="text-secondary font-weight-medium text-decoration-none" href="#">View All</a>
             </div>
         </div>
         @foreach($latests as $latest)
@@ -29,6 +29,12 @@
         @livewire('welcome.section.pan-african-news')
         <div class="col-lg-12 mb-3">
             <a href=""><img class="img-fluid w-100" src="{{ asset('asset/img/ads.png')}}" alt=""></a>
+        </div>
+        <div class="col-12">
+            <div class="section-title">
+                <h4 class="m-0 text-uppercase font-weight-bold">Natty Dread Photo Source</h4>
+                <a class="text-secondary font-weight-medium text-decoration-none" href="{{URL::signedRoute('More Photos')}}">View All</a>
+            </div>
         </div>
         <div class="col-lg-12 mb-5">
             <div class="row news-lg mx-0 mb-3 d-flex align-items-stretch">
