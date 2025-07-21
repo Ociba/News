@@ -6,13 +6,20 @@ use App\Models\Advert;
 use App\Models\News;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class Category extends Component
 {
+    use WithPagination;
+
     public $category;
     public $perPage = 4;
     public $currentAdvertIndex = 0;
     public $adverts = [];
+
+    public $page = 1; // <--- Add this property
+
+    protected $queryString = ['page']; 
 
     public function mount($category)
     {
